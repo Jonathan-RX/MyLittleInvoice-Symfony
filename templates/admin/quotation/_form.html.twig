@@ -1,32 +1,41 @@
 {{ form_start(form) }}
+
+<div class="row">
+    <div class="col-6">
+        {{ form_row(form.Customer) }}
+        {{ form_row(form.adress) }}
+        {{ form_row(form.email) }}
+    </div>
+</div>
+
 <button type="button" class="add_item_link" data-collection-holder-class="content">Add a line</button>
     <table class="content table" data-prototype="{{ form_widget(form.content.vars.prototype)|e('html_attr') }}">
         <thead>
-                <th>Ref</th>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Taxes</th>
-                <th>Price</th>
-                <th>Total</th>
-                <th>Action</th>
+                <th class="ref">Ref</th>
+                <th class="description">Description</th>
+                <th class="quantity">Qty</th>
+                <th class="taxes">Taxes</th>
+                <th class="price">Price</th>
+                <th class="total">Total</th>
+                <th></th>
         </thead>
         <tbody>
             {% for cont in form.content %}
                 <tr id="quotation_content_{{ loop.index0 }}">
                     <td class="form-group ref">
-                        <input type="text" id="quotation_content_{{ loop.index0 }}_reference" name="quotation[content][{{ loop.index0 }}][reference]" value="{{ cont.reference.vars.value }}" required="required" class="form-control" />
+                        <input type="text" id="quotation_content_{{ loop.index0 }}_reference" name="quotation[content][{{ loop.index0 }}][reference]" value="{{ cont.reference.vars.value }}" class="form-control" />
                     </td>
                     <td class="form-group description">
-                        <input type="text" id="quotation_content_{{ loop.index0 }}_description" name="quotation[content][{{ loop.index0 }}][description]" value="{{ cont.description.vars.value }}" required="required" class="form-control" />
+                        <input type="text" id="quotation_content_{{ loop.index0 }}_description" name="quotation[content][{{ loop.index0 }}][description]" value="{{ cont.description.vars.value }}" class="form-control" />
                     </td>
                     <td class="form-group quantity">
-                        <input type="number" id="quotation_content_{{ loop.index0 }}_quantity" name="quotation[content][{{ loop.index0 }}][quantity]" value="{{ cont.quantity.vars.value }}" required="required" class="form-control" />
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_quantity" name="quotation[content][{{ loop.index0 }}][quantity]" value="{{ cont.quantity.vars.value }}" class="form-control" />
                     </td>
                     <td class="form-group taxes">
-                        <input type="number" id="quotation_content_{{ loop.index0 }}_taxes" name="quotation[content][{{ loop.index0 }}][taxes]" value="{{ cont.taxes.vars.value }}" required="required" class="form-control" />
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_taxes" name="quotation[content][{{ loop.index0 }}][taxes]" value="{{ cont.taxes.vars.value }}" class="form-control" />
                     </td>
                     <td class="form-group price">
-                        <input type="number" id="quotation_content_{{ loop.index0 }}_price" name="quotation[content][{{ loop.index0 }}][price]" value="{{ cont.price.vars.value }}" required="required" class="form-control" />
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_price" name="quotation[content][{{ loop.index0 }}][price]" value="{{ cont.price.vars.value }}" class="form-control" />
                     </td>
                     <td class="form-group total">
 
@@ -35,7 +44,6 @@
             {% endfor %}
         </tbody>
     </table>
-{{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ form_end(form, {'render_rest': false}) }}
 

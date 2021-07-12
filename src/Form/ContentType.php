@@ -14,19 +14,24 @@ class ContentType extends AbstractType
     {
         $builder
             ->add('reference', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false,
             ])
             ->add('description', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false,
             ])
             ->add('quantity', IntegerType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false,
             ])
             ->add('taxes', IntegerType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false,
             ])
             ->add('price', IntegerType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false,
             ])
         ;
     }

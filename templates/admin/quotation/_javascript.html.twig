@@ -4,7 +4,7 @@
         $collectionHolder.find('tr').each(function() {
             addLineFormDeleteLink($(this));
         });
-        var $lineCollectionHolder = $('.content');
+        var $lineCollectionHolder = $('.content tbody');
         $lineCollectionHolder.data('index', $lineCollectionHolder.find('input').length);
 
         $('body').on('click', '.add_item_link', function(e) {
@@ -23,11 +23,13 @@
 
         $collectionHolder.data('index', index + 1);
 
-        $collectionHolder.children('tbody').append(newForm);
-        addLineFormDeleteLink(newForm);
+        var $newFormTr = $('<tr></tr>').append(newForm);
+
+        $collectionHolder.children('tbody').append($newFormTr);
+        addLineFormDeleteLink($newFormTr);
     }
     function addLineFormDeleteLink($lineFormTr) {
-        var $removeFormButton = $('<button type="button">Delete this line</button>');
+        var $removeFormButton = $('<button type="button" class="btn btn-danger">Delete this line</button>');
         var $eraseTd = $('<td class="form-group action"></td>').append($removeFormButton);
         $lineFormTr.append($eraseTd);
 
