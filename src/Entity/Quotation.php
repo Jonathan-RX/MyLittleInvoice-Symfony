@@ -23,9 +23,9 @@ class Quotation
     private $Customer;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $adress = [];
+    private $adress;
 
     /**
      * @ORM\Column(type="array", nullable=true)
@@ -52,6 +52,11 @@ class Quotation
      */
     private $created_by;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,12 +74,12 @@ class Quotation
         return $this;
     }
 
-    public function getAdress(): ?array
+    public function getAdress(): ?string
     {
         return $this->adress;
     }
 
-    public function setAdress(?array $adress): self
+    public function setAdress(?string $adress): self
     {
         $this->adress = $adress;
 
@@ -137,6 +142,18 @@ class Quotation
     public function setCreatedBy(?User $created_by): self
     {
         $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

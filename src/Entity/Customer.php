@@ -25,9 +25,9 @@ class Customer
     private $name;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $adress = [];
+    private $adress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -73,12 +73,12 @@ class Customer
         return $this;
     }
 
-    public function getAdress(): ?array
+    public function getAdress(): ?string
     {
         return $this->adress;
     }
 
-    public function setAdress(?array $adress): self
+    public function setAdress(?string $adress): self
     {
         $this->adress = $adress;
 

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Customer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,7 @@ class CustomerType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('adress')
+            ->add('adress', TextareaType::class)
             ->add('email')
         ;
     }
