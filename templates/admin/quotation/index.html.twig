@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quotation index{% endblock %}
+
+{% block body %}
+    <h1>Quotation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adress</th>
+                <th>Content</th>
+                <th>Printed</th>
+                <th>Send_by_mail</th>
+                <th>Created_at</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for quotation in quotations %}
+            <tr>
+                <td>{{ quotation.id }}</td>
+                <td>{{ quotation.adress }}</td>
+                <td>{{ quotation.content ? quotation.content|join(', ') : '' }}</td>
+                <td>{{ quotation.printed ? 'Yes' : 'No' }}</td>
+                <td>{{ quotation.sendByMail ? 'Yes' : 'No' }}</td>
+                <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ quotation.email }}</td>
+                <td>
+                    <a href="{{ path('admin_quotation_show', {'id': quotation.id}) }}">show</a>
+                    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_quotation_new') }}">Create new</a>
+{% endblock %}

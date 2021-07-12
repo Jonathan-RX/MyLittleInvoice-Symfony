@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quotation{% endblock %}
+
+{% block body %}
+    <h1>Quotation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ quotation.id }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ quotation.adress }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ quotation.content ? quotation.content|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Printed</th>
+                <td>{{ quotation.printed ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Send_by_mail</th>
+                <td>{{ quotation.sendByMail ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ quotation.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_quotation_index') }}">back to list</a>
+
+    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}">edit</a>
+
+    {{ include('admin_quotation/_delete_form.html.twig') }}
+{% endblock %}
