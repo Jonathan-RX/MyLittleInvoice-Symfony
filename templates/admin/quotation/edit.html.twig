@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Quotation</h1>
 
-    {{ include('admin_quotation/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/quotation/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('admin_quotation_index') }}">back to list</a>
 
-    {{ include('admin_quotation/_delete_form.html.twig') }}
+    {{ include('admin/quotation/_delete_form.html.twig') }}
 {% endblock %}
