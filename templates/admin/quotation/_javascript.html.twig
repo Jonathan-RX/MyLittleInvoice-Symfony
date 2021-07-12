@@ -1,7 +1,7 @@
 <script>
     jQuery(document).ready(function() {
-        $collectionHolder = $('.content');
-        $collectionHolder.find('td').each(function() {
+        $collectionHolder = $('.content tbody');
+        $collectionHolder.find('tr').each(function() {
             addLineFormDeleteLink($(this));
         });
         var $lineCollectionHolder = $('.content');
@@ -23,15 +23,16 @@
 
         $collectionHolder.data('index', index + 1);
 
-        $collectionHolder.append(newForm)
+        $collectionHolder.children('tbody').append(newForm);
         addLineFormDeleteLink(newForm);
     }
-    function addLineFormDeleteLink($lineFormLi) {
-        var $removeFormButton = $('<td><button type="button">Delete this line</button></td>');
-        $lineFormLi.append($removeFormButton);
+    function addLineFormDeleteLink($lineFormTr) {
+        var $removeFormButton = $('<button type="button">Delete this line</button>');
+        var $eraseTd = $('<td class="form-group action"></td>').append($removeFormButton);
+        $lineFormTr.append($eraseTd);
 
         $removeFormButton.on('click', function(e) {
-            $lineFormLi.remove();
+            $lineFormTr.remove();
         });
     }
 

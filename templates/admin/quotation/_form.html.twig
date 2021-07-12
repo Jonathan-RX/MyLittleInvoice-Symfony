@@ -2,7 +2,6 @@
 <button type="button" class="add_item_link" data-collection-holder-class="content">Add a line</button>
     <table class="content table" data-prototype="{{ form_widget(form.content.vars.prototype)|e('html_attr') }}">
         <thead>
-            <tr>
                 <th>Ref</th>
                 <th>Description</th>
                 <th>Qty</th>
@@ -10,8 +9,31 @@
                 <th>Price</th>
                 <th>Total</th>
                 <th>Action</th>
-            </tr>
         </thead>
+        <tbody>
+            {% for cont in form.content %}
+                <tr id="quotation_content_{{ loop.index0 }}">
+                    <td class="form-group ref">
+                        <input type="text" id="quotation_content_{{ loop.index0 }}_reference" name="quotation[content][{{ loop.index0 }}][reference]" value="{{ cont.reference.vars.value }}" required="required" class="form-control" />
+                    </td>
+                    <td class="form-group description">
+                        <input type="text" id="quotation_content_{{ loop.index0 }}_description" name="quotation[content][{{ loop.index0 }}][description]" value="{{ cont.description.vars.value }}" required="required" class="form-control" />
+                    </td>
+                    <td class="form-group quantity">
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_quantity" name="quotation[content][{{ loop.index0 }}][quantity]" value="{{ cont.quantity.vars.value }}" required="required" class="form-control" />
+                    </td>
+                    <td class="form-group taxes">
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_taxes" name="quotation[content][{{ loop.index0 }}][taxes]" value="{{ cont.taxes.vars.value }}" required="required" class="form-control" />
+                    </td>
+                    <td class="form-group price">
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_price" name="quotation[content][{{ loop.index0 }}][price]" value="{{ cont.price.vars.value }}" required="required" class="form-control" />
+                    </td>
+                    <td class="form-group total">
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
