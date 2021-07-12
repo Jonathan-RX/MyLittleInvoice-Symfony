@@ -6,6 +6,7 @@ use App\Entity\Customer;
 use App\Entity\Quotation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,7 +21,11 @@ class QuotationType extends AbstractType
             ])
             ->add('adress')
             ->add('email')
-            ->add('content')
+            ->add('content', CollectionType::class,[
+                'entry_type' => ContentType::class,
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
         ;
     }
 
