@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,11 +13,21 @@ class ContentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reference')
-            ->add('description')
-            ->add('quantity')
-            ->add('taxes')
-            ->add('price')
+            ->add('reference', TextType::class, [
+                'label' => false
+            ])
+            ->add('description', TextType::class, [
+                'label' => false
+            ])
+            ->add('quantity', IntegerType::class, [
+                'label' => false
+            ])
+            ->add('taxes', IntegerType::class, [
+                'label' => false
+            ])
+            ->add('price', IntegerType::class, [
+                'label' => false
+            ])
         ;
     }
 

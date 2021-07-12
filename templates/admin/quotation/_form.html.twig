@@ -1,4 +1,46 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+<button type="button" class="add_item_link" data-collection-holder-class="content">Add a line</button>
+    <ul class="content" data-prototype="{{ form_widget(form.content.vars.prototype)|e('html_attr') }}"></ul>
+{{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+<script>
+    jQuery(document).ready(function() {
+        $collectionHolder = $('.content');
+        $collectionHolder.find('td').each(function() {
+            addLineFormDeleteLink($(this));
+        });
+        var $ColllineectionHolder = $('.content');
+        $lineCollectionHolder.data('index', $lineCollectionHolder.find('input').length);
+
+        $('body').on('click', '.add_item_link', function(e) {
+            var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
+            addFormToCollection($collectionHolderClass);
+        })
+    });
+
+    function addFormToCollection($collectionHolderClass) {
+        var $collectionHolder = $('.' + $collectionHolderClass);
+        var prototype = $collectionHolder.data('prototype');
+        var index = $collectionHolder.data('index');
+
+        var newForm = prototype;
+        newForm = newForm.replace(/__name__/g, index);
+
+        $collectionHolder.data('index', index + 1);
+
+        var $newFormLi = $('<li class="content-line"></li>').append(newForm);
+        $collectionHolder.append($newFormLi)
+        addLineFormDeleteLink($newFormLi);
+    }
+    function addLineFormDeleteLink($lineFormLi) {
+        var $removeFormButton = $('<button type="button">Delete this line</button>');
+        $lineFormLi.append($removeFormButton);
+
+        $removeFormButton.on('click', function(e) {
+            $lineFormLi.remove();
+        });
+    }
+
+</script>

@@ -2,6 +2,12 @@
 
 {% block title %}Edit Quotation{% endblock %}
 
+{% form_theme form _self %}
+{% block _recipe_quantity_entry_widget %}
+    {{ include('admin/quotation/_widget_configuration.html.twig') }}
+{% endblock %}
+
+
 {% block body %}
     <h1>Edit Quotation</h1>
 
