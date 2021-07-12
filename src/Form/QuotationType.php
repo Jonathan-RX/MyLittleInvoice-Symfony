@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Customer;
 use App\Entity\Quotation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,14 +14,13 @@ class QuotationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('Customer', EntityType::class,[
+                'class' => Customer::class,
+                'choice_label' => 'name'
+            ])
             ->add('adress')
-            ->add('content')
-            ->add('printed')
-            ->add('send_by_mail')
-            ->add('created_at')
             ->add('email')
-            ->add('Customer')
-            ->add('created_by')
+            ->add('content')
         ;
     }
 
