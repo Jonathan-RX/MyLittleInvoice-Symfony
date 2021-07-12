@@ -17,7 +17,7 @@
                 <th class="taxes">Taxes</th>
                 <th class="price">Price</th>
                 <th class="total">Total</th>
-                <th></th>
+                <th class="action"></th>
         </thead>
         <tbody>
             {% for cont in form.content %}
@@ -45,5 +45,35 @@
         </tbody>
     </table>
     <button class="btn">{{ button_label|default('Save') }}</button>
+
+<style type="text/css">
+    .ref, .quantity, .taxes, .price, .total{
+        width: 7%;
+    }
+    .description{
+        width: 50%;
+    }
+    .total{
+        font-weight: bold;
+    }
+    .action{
+        text-align: right;
+    }
+    table tbody td{
+        padding:0 !important;
+        margin:0 !important;
+        position: relative;
+    }
+    table input{
+        border: none !important;
+        border-right: 1px solid #EEE  !important;
+        border-radius: 0 !important;
+        position: absolute;
+        margin: 0 !important;
+        padding:0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+</style>
 {{ form_end(form, {'render_rest': false}) }}
 
