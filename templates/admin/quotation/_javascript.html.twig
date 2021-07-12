@@ -1,0 +1,38 @@
+<script>
+    jQuery(document).ready(function() {
+        $collectionHolder = $('.content');
+        $collectionHolder.find('td').each(function() {
+            addLineFormDeleteLink($(this));
+        });
+        var $lineCollectionHolder = $('.content');
+        $lineCollectionHolder.data('index', $lineCollectionHolder.find('input').length);
+
+        $('body').on('click', '.add_item_link', function(e) {
+            var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
+            addFormToCollection($collectionHolderClass);
+        })
+    });
+
+    function addFormToCollection($collectionHolderClass) {
+        var $collectionHolder = $('.' + $collectionHolderClass);
+        var prototype = $collectionHolder.data('prototype');
+        var index = $collectionHolder.data('index');
+
+        var newForm = prototype;
+        newForm = newForm.replace(/__name__/g, index);
+
+        $collectionHolder.data('index', index + 1);
+
+        $collectionHolder.append(newForm)
+        addLineFormDeleteLink(newForm);
+    }
+    function addLineFormDeleteLink($lineFormLi) {
+        var $removeFormButton = $('<td><button type="button">Delete this line</button></td>');
+        $lineFormLi.append($removeFormButton);
+
+        $removeFormButton.on('click', function(e) {
+            $lineFormLi.remove();
+        });
+    }
+
+</script>
