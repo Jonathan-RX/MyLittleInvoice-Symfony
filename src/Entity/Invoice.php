@@ -25,9 +25,9 @@ class Invoice
     private $Customer;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $adress = [];
+    private $adress;
 
     /**
      * @ORM\Column(type="array", nullable=true)
@@ -64,6 +64,11 @@ class Invoice
      */
     private $payments;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
     public function __construct()
     {
         $this->payments = new ArrayCollection();
@@ -86,12 +91,12 @@ class Invoice
         return $this;
     }
 
-    public function getAdress(): ?array
+    public function getAdress(): ?string
     {
         return $this->adress;
     }
 
-    public function setAdress(?array $adress): self
+    public function setAdress(?string $adress): self
     {
         $this->adress = $adress;
 
@@ -196,6 +201,18 @@ class Invoice
                 $payment->setInvoice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
