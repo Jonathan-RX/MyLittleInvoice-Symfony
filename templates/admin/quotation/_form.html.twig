@@ -2,7 +2,11 @@
 {{ form_widget(form._token) }}
 <div class="row">
     <div class="col-6">
-        {{ form_row(form.Customer) }}
+        <select id="quotation_Customer" name="quotation[Customer]" class="form-control">
+        {% for cus in form.Customer.vars.choices %}
+            <option value="{{ cus.data.id }}" data-email="{{ cus.data.email }}" data-adress="{{ cus.data.adress }}" {{ (cus.data.id == form.Customer.vars.value) ? ' selected="selected"': '' }}>{{ cus.data.name }}</option>
+        {% endfor %}
+        </select>
         {{ form_row(form.email) }}
     </div>
     <div class="col-6">

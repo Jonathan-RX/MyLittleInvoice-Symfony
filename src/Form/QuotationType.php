@@ -17,7 +17,7 @@ class QuotationType extends AbstractType
         $builder
             ->add('Customer', EntityType::class,[
                 'class' => Customer::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
             ])
             ->add('adress')
             ->add('email')
