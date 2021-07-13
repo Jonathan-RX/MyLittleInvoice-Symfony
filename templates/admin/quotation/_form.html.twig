@@ -1,20 +1,22 @@
 {{ form_start(form) }}
-
+{{ form_widget(form._token) }}
 <div class="row">
     <div class="col-6">
         {{ form_row(form.Customer) }}
-        {{ form_row(form.adress) }}
         {{ form_row(form.email) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.adress) }}
     </div>
 </div>
 
-<button type="button" class="add_item_link" data-collection-holder-class="content">Add a line</button>
+<button type="button" class="add_item_link mt-2 mb-2" data-collection-holder-class="content">Add a line</button>
     <table class="content table" data-prototype="{{ form_widget(form.content.vars.prototype)|e('html_attr') }}">
         <thead>
                 <th class="ref">Ref</th>
                 <th class="description">Description</th>
                 <th class="quantity">Qty</th>
-                <th class="taxes">Taxes</th>
+                <th class="taxes">Tax (%)</th>
                 <th class="price">Price</th>
                 <th class="total">Total</th>
                 <th class="action"></th>
@@ -37,13 +39,31 @@
                     <td class="form-group price">
                         <input type="number" id="quotation_content_{{ loop.index0 }}_price" name="quotation[content][{{ loop.index0 }}][price]" value="{{ cont.price.vars.value }}" class="form-control" />
                     </td>
-                    <td class="form-group total">
+                    <td class="form-group total bg-white">
 
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div class="row justify-content-end">
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <th>Subtotal</th>
+                    <td class="subtotal bg-white"></td>
+                </tr>
+                <tr>
+                    <th>Taxes</th>
+                    <td class="subtotal-taxes bg-white"></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td class="grand-total bg-white"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 
 <style type="text/css">
@@ -53,11 +73,21 @@
     .description{
         width: 50%;
     }
-    .total{
+    .total, .subtotal, .subtotal-taxes, .grand-total{
         font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .bg-white{
+        --bs-table-accent-bg: white;
     }
     .action{
         text-align: right;
+    }
+    table thead{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     table tbody td{
         padding:0 !important;
