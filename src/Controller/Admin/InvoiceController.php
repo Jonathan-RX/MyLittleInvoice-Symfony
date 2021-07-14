@@ -91,4 +91,32 @@ class InvoiceController extends AbstractController
 
         return $this->redirectToRoute('admin_invoice_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * @Route("/archive/{id}", name="admin_invoice_archive", methods={"POST"})
+     */
+    public function archive(Request $request, Invoice $invoice): Response
+    {
+        if ($this->isCsrfTokenValid('archive'.$invoice->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $invoice->setArchived(true);
+            $entityManager->persist($invoice);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_invoice_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/unarchive/{id}", name="admin_invoice_unarchive", methods={"POST"})
+     */
+    public function unarchive(Request $request, Invoice $invoice): Response
+    {
+        if ($this->isCsrfTokenValid('unarchive'.$invoice->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $invoice->setArchived(false);
+            $entityManager->persist($invoice);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_invoice_index', [], Response::HTTP_SEE_OTHER);
+    }
 }

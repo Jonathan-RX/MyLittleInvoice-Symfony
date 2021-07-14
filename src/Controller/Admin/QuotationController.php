@@ -91,4 +91,33 @@ class QuotationController extends AbstractController
 
         return $this->redirectToRoute('admin_quotation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+     * @Route("/archive/{id}", name="admin_quotation_archive", methods={"POST"})
+     */
+    public function archive(Request $request, Quotation $quotation): Response
+    {
+        if ($this->isCsrfTokenValid('archive'.$quotation->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $quotation->setArchived(true);
+            $entityManager->persist($quotation);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_quotation_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/unarchive/{id}", name="admin_quotation_unarchive", methods={"POST"})
+     */
+    public function unarchive(Request $request, Quotation $quotation): Response
+    {
+        if ($this->isCsrfTokenValid('unarchive'.$quotation->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $quotation->setArchived(false);
+            $entityManager->persist($quotation);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_quotation_index', [], Response::HTTP_SEE_OTHER);
+    }
 }
