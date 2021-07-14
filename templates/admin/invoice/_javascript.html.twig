@@ -1,0 +1,76 @@
+<script>
+    jQuery(document).ready(function() {
+        $collectionHolder = $('.content tbody');
+        $collectionHolder.find('tr').each(function() {
+            addLineFormDeleteLink($(this));
+            calcTotal($(this));
+        });
+        bigTotal();
+        var $lineCollectionHolder = $('.content tbody');
+        $lineCollectionHolder.data('index', $lineCollectionHolder.find('input').length);
+
+        $('body').on('click', '.add_item_link', function(e) {
+            var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
+            addFormToCollection($collectionHolderClass);
+        });
+        $('body').on('change', '.content tbody input', function(e) {
+            calcTotal($(this).parent('td').parent('tr'));
+            bigTotal();
+        });
+        $('#invoice_Customer').on('change', function(){
+            var email = $('#invoice_Customer option:selected').data('email');
+            var adress = $('#invoice_Customer option:selected').data('adress');
+            $('#invoice_email').val(email);
+            $('#invoice_adress').val(adress);
+        })
+    });
+
+    function addFormToCollection($collectionHolderClass) {
+        var $collectionHolder = $('.' + $collectionHolderClass);
+        var prototype = $collectionHolder.data('prototype');
+        var index = $collectionHolder.children('tbody').data('index');
+
+        var newForm = prototype;
+        newForm = newForm.replace(/__name__/g, index);
+
+        $collectionHolder.children('tbody').data('index', index + 1);
+
+        var $newFormTr = $('<tr></tr>').append(newForm);
+
+        $collectionHolder.children('tbody').append($newFormTr);
+        addLineFormDeleteLink($newFormTr);
+    }
+    function addLineFormDeleteLink($lineFormTr) {
+        var $removeFormButton = $('<button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>');
+        var $eraseTd = $('<td class="form-group action bg-white"></td>').append($removeFormButton);
+        $lineFormTr.append($eraseTd);
+
+        $removeFormButton.on('click', function(e) {
+            $lineFormTr.remove();
+        });
+    }
+    function calcTotal($line){
+        var price = $line.children('.price').children('input').val();
+        var qty = $line.children('.quantity').children('input').val();
+        var tax = $line.children('.taxes').children('input').val();
+        var total = price * qty * (tax/100+1);
+        $line.children('.total').html(total.toFixed(2) );
+    }
+    function bigTotal(){
+        var subtotal = 0;
+        var taxes = 0;
+        var BigTotal = 0;
+        $('.content tbody tr').each(function() {
+            var p = $(this).children('.price').children('input').val();
+            var q = $(this).children('.quantity').children('input').val();
+            var t = $(this).children('.taxes').children('input').val();
+            subtotal = subtotal + p*q;
+            taxes = taxes + t/100*p*q;
+            BigTotal = BigTotal +  (1+t/100) *p*q;
+            $('.subtotal').html(subtotal.toFixed(2));
+            $('.subtotal-taxes').html(taxes.toFixed(2));
+            $('.grand-total').html(BigTotal.toFixed(2));
+        });
+    }
+
+</script>

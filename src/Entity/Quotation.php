@@ -57,6 +57,11 @@ class Quotation
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $archived;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +159,18 @@ class Quotation
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getArchived(): ?bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(?bool $archived): self
+    {
+        $this->archived = $archived;
 
         return $this;
     }
