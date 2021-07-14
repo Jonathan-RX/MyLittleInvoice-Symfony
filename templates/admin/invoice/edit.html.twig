@@ -2,6 +2,16 @@
 
 {% block title %}Edit Invoice{% endblock %}
 
+{% form_theme form _self %}
+{% block _invoice_content_entry_widget %}
+    {{ include('admin/invoice/_widget_configuration.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('admin/invoice/_javascript.html.twig') }}
+{% endblock %}
+
+
 {% block body %}
     <h1>Edit Invoice</h1>
 

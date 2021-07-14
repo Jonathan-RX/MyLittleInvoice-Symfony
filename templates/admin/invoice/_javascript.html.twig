@@ -17,11 +17,11 @@
             calcTotal($(this).parent('td').parent('tr'));
             bigTotal();
         });
-        $('#quotation_Customer').on('change', function(){
-            var email = $('#quotation_Customer option:selected').data('email');
-            var adress = $('#quotation_Customer option:selected').data('adress');
-            $('#quotation_email').val(email);
-            $('#quotation_adress').val(adress);
+        $('#invoice_Customer').on('change', function(){
+            var email = $('#invoice_Customer option:selected').data('email');
+            var adress = $('#invoice_Customer option:selected').data('adress');
+            $('#invoice_email').val(email);
+            $('#invoice_adress').val(adress);
         })
     });
 

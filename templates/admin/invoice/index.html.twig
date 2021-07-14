@@ -10,11 +10,9 @@
             <tr>
                 <th>Id</th>
                 <th>Adress</th>
-                <th>Content</th>
                 <th>Sold</th>
                 <th>Printed</th>
                 <th>Send_by_mail</th>
-                <th>Created_at</th>
                 <th>Email</th>
                 <th>actions</th>
             </tr>
@@ -24,11 +22,9 @@
             <tr>
                 <td>{{ invoice.id }}</td>
                 <td>{{ invoice.adress }}</td>
-                <td>{{ invoice.content ? invoice.content|join(', ') : '' }}</td>
                 <td>{{ invoice.sold }}</td>
                 <td>{{ invoice.printed ? 'Yes' : 'No' }}</td>
                 <td>{{ invoice.sendByMail ? 'Yes' : 'No' }}</td>
-                <td>{{ invoice.createdAt ? invoice.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ invoice.email }}</td>
                 <td>
                     <a href="{{ path('admin_invoice_show', {'id': invoice.id}) }}">show</a>
