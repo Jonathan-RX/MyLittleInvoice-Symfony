@@ -1,0 +1,116 @@
+{{ form_start(form) }}
+{{ form_widget(form._token) }}
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            <label for="quotation_Customer">Customer</label>
+            <select id="quotation_Customer" name="quotation[Customer]" class="form-control">
+            {% for cus in form.Customer.vars.choices %}
+                <option value="{{ cus.data.id }}" data-email="{{ cus.data.email }}" data-adress="{{ cus.data.adress }}" {{ (cus.data.id == form.Customer.vars.value) ? ' selected="selected"': '' }}>{{ cus.data.name }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        {{ form_row(form.email) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.adress) }}
+    </div>
+</div>
+
+<button type="button" class="add_item_link mt-2 mb-2" data-collection-holder-class="content">Add a line</button>
+    <table class="content table" data-prototype="{{ form_widget(form.content.vars.prototype)|e('html_attr') }}">
+        <thead>
+                <th class="ref">Ref</th>
+                <th class="description">Description</th>
+                <th class="quantity">Qty</th>
+                <th class="taxes">Tax (%)</th>
+                <th class="price">Price</th>
+                <th class="total">Total</th>
+                <th class="action"></th>
+        </thead>
+        <tbody>
+            {% for cont in form.content %}
+                <tr id="quotation_content_{{ loop.index0 }}">
+                    <td class="form-group ref">
+                        <input type="text" id="quotation_content_{{ loop.index0 }}_reference" name="quotation[content][{{ loop.index0 }}][reference]" value="{{ cont.reference.vars.value }}" class="form-control" />
+                    </td>
+                    <td class="form-group description">
+                        <input type="text" id="quotation_content_{{ loop.index0 }}_description" name="quotation[content][{{ loop.index0 }}][description]" value="{{ cont.description.vars.value }}" class="form-control" />
+                    </td>
+                    <td class="form-group quantity">
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_quantity" name="quotation[content][{{ loop.index0 }}][quantity]" value="{{ cont.quantity.vars.value }}" class="form-control" />
+                    </td>
+                    <td class="form-group taxes">
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_taxes" name="quotation[content][{{ loop.index0 }}][taxes]" value="{{ cont.taxes.vars.value }}" class="form-control" />
+                    </td>
+                    <td class="form-group price">
+                        <input type="number" id="quotation_content_{{ loop.index0 }}_price" name="quotation[content][{{ loop.index0 }}][price]" value="{{ cont.price.vars.value }}" class="form-control" />
+                    </td>
+                    <td class="form-group total bg-white">
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="row justify-content-end">
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <th>Subtotal</th>
+                    <td class="subtotal bg-white"></td>
+                </tr>
+                <tr>
+                    <th>Taxes</th>
+                    <td class="subtotal-taxes bg-white"></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td class="grand-total bg-white"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<style type="text/css">
+    .ref, .quantity, .taxes, .price, .total{
+        width: 7%;
+    }
+    .description{
+        width: 50%;
+    }
+    .total, .subtotal, .subtotal-taxes, .grand-total{
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .bg-white{
+        --bs-table-accent-bg: white;
+    }
+    .action{
+        text-align: right;
+    }
+    table thead{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    table tbody td{
+        padding:0 !important;
+        margin:0 !important;
+        position: relative;
+    }
+    table input{
+        border: none !important;
+        border-right: 1px solid #EEE  !important;
+        border-radius: 0 !important;
+        position: absolute;
+        margin: 0 !important;
+        padding:0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+</style>
+{{ form_end(form, {'render_rest': false}) }}
+
