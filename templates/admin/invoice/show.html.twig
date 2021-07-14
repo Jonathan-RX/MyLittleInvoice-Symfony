@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoice{% endblock %}
+
+{% block body %}
+    <h1>Invoice</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ invoice.id }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ invoice.adress }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ invoice.content ? invoice.content|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Sold</th>
+                <td>{{ invoice.sold }}</td>
+            </tr>
+            <tr>
+                <th>Printed</th>
+                <td>{{ invoice.printed ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Send_by_mail</th>
+                <td>{{ invoice.sendByMail ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ invoice.createdAt ? invoice.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ invoice.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_invoice_index') }}">back to list</a>
+
+    <a href="{{ path('admin_invoice_edit', {'id': invoice.id}) }}">edit</a>
+
+    {{ include('admin/invoice/_delete_form.html.twig') }}
+{% endblock %}
