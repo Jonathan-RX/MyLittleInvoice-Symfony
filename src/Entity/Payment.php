@@ -37,6 +37,11 @@ class Payment
      */
     private $Customer;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $mode;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Payment
     public function setCustomer(?Customer $Customer): self
     {
         $this->Customer = $Customer;
+
+        return $this;
+    }
+
+    public function getMode(): ?int
+    {
+        return $this->mode;
+    }
+
+    public function setMode(?int $mode): self
+    {
+        $this->mode = $mode;
 
         return $this;
     }
