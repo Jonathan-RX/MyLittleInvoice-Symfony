@@ -10,9 +10,9 @@
             <tr>
                 <th>Customer</th>
                 <th>Sold</th>
-                <th>Archived</th>
-                <th>Printed</th>
-                <th>Send_by_mail</th>
+                <th><i class="bi bi-archive"></i></th>
+                <th><i class="bi bi-printer"></i></th>
+                <th><i class="bi bi-envelope-open"></i></th>
                 <th>Email</th>
                 <th>actions</th>
             </tr>
@@ -21,7 +21,20 @@
         {% for invoice in invoices %}
             <tr>
                 <td>{{ invoice.Customer.name }}</td>
-                <td>{{ invoice.sold }}</td>
+                <td>
+                    {{ invoice.sold }}
+                    <div class="d-inline-block justify-content-end">
+                        <button type="button" class="btn btn-link newPayment" data-bs-toggle="modal" data-bs-target="#newPayment" data-id-invoice="{{ invoice.id }}" data-sold="{{ invoice.sold }}">
+                            <i class="bi bi-cash-coin"></i>
+                        </button>
+                        <button type="button" class="btn btn-link paymentList text-primary" data-bs-toggle="modal" data-bs-target="#newPayment">
+                            <i class="bi bi-cash-stack"></i>
+                        </button>
+                    </div>
+                    {% for payment in invoice.payments %}
+                        <div class="visually-hidden" data-id-invoice="{{ invoice.id }}" data-id="{{ payment.id }}" data-amount="{{ payment.amount }}" data-date="{{ payment.date|date("d/m/Y") }}"></div>
+                    {% endfor %}
+                </td>
                 <td>{{ invoice.archived ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>' }}</td>
                 <td>{{ invoice.printed ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>' }}</td>
                 <td>{{ invoice.sendByMail ? '<i class="bi bi-check-circle"></i>' : '<i class="bi bi-x-circle"></i>' }}</td>
@@ -51,4 +64,5 @@
     </table>
 
     <a href="{{ path('admin_invoice_new') }}" class="btn btn-outline-success">Create new</a>
+    {{ include('admin/invoice/_modal.html.twig') }}
 {% endblock %}
