@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Invoice;
+use App\Entity\Payment;
 use App\Form\InvoiceType;
+use App\Form\PaymentType;
 use App\Repository\InvoiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,8 +22,11 @@ class InvoiceController extends AbstractController
      */
     public function index(InvoiceRepository $invoiceRepository): Response
     {
+        $payment = new Payment();
+        $form = $this->createForm(PaymentType::class, $payment);
         return $this->render('admin/invoice/index.html.twig', [
             'invoices' => $invoiceRepository->findAll(),
+            'newPayment' => $form->createView(),
         ]);
     }
 

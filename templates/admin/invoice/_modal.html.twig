@@ -8,25 +8,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="newPaymentDate">Date :</label>
-                        </div>
-                        <div class="col-6">
-                            <input type="text" id="newPaymentDate" name="newPaymentDate" /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="newPaymentAmount">Amount :</label>
-                        </div>
-                        <div class="col">
-                            <input type="text" id="newPaymentAmount" name="newPaymentAmount" />
-                        </div>
-                    </div>
-                         <input type="hidden" id="newPaymentId" name="newPaymentId" />
+                    {{ form_start(newPayment) }}
+                        <input type="hidden" name="payment[id]" id="payment_id">
+                        {{ form_row(newPayment.amount) }}
+                        {{ form_row(newPayment.date) }}
+                        {{ form_row(newPayment.mode) }}
+                    {{ form_end(newPayment) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -58,9 +48,9 @@
         $('.newPayment').click(function () {
             var id = $(this).data('id-invoice');
             var sold = $(this).data('sold');
-            $('#newPayment input[name=newPaymentAmount]').val(sold);
-            $('#newPayment input[name=newPaymentId]').val(id);
-            $('#newPayment input[name=newPaymentDate]').val('{{ "now"|date("d/m/Y") }}');
+            $('#payment_amount').val(sold);
+            $('#payment_id').val(id);
+            $('#payment_date').val('{{ "now"|date("Y-m-d") }}');
 
         });
     });
