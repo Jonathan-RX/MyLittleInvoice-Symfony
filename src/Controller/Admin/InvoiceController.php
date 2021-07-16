@@ -20,10 +20,18 @@ class InvoiceController extends AbstractController
     /**
      * @Route("/", name="admin_invoice_index", methods={"GET"})
      */
-    public function index(InvoiceRepository $invoiceRepository): Response
+    public function index(InvoiceRepository $invoiceRepository, Request $request): Response
     {
         $payment = new Payment();
         $form = $this->createForm(PaymentType::class, $payment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($payment);
+            $entityManager->flush();
+        }
+
         return $this->render('admin/invoice/index.html.twig', [
             'invoices' => $invoiceRepository->findAll(),
             'newPayment' => $form->createView(),
