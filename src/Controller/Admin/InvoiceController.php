@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InvoiceController extends AbstractController
 {
     /**
-     * @Route("/", name="admin_invoice_index", methods={"GET"})
+     * @Route("/", name="admin_invoice_index", methods={"GET", "POST"})
      */
     public function index(InvoiceRepository $invoiceRepository, Request $request): Response
     {
@@ -26,10 +26,12 @@ class InvoiceController extends AbstractController
         $form = $this->createForm(PaymentType::class, $payment);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() ){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($payment);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin_invoice_index');
         }
 
         return $this->render('admin/invoice/index.html.twig', [
