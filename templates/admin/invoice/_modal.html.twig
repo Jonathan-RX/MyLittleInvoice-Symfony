@@ -7,18 +7,18 @@
                     <h5 class="modal-title" id="newPaymentModalLabel">New payment</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                {{ form_start(newPayment) }}
                 <div class="modal-body">
-                    {{ form_start(newPayment) }}
-                        <input type="hidden" name="payment[id]" id="payment_id">
+                        {{ form_row(newPayment.invoice) }}
                         {{ form_row(newPayment.amount) }}
                         {{ form_row(newPayment.date) }}
                         {{ form_row(newPayment.mode) }}
-                    {{ form_end(newPayment) }}
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" value="Save">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
+                {{ form_end(newPayment) }}
             </form>
         </div>
     </div>
@@ -49,7 +49,7 @@
             var id = $(this).data('id-invoice');
             var sold = $(this).data('sold');
             $('#payment_amount').val(sold);
-            $('#payment_id').val(id);
+            $('#payment_invoice').val(id);
             $('#payment_date').val('{{ "now"|date("Y-m-d") }}');
 
         });
