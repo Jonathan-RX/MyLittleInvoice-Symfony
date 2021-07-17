@@ -31,5 +31,9 @@ services:
                 entity: 'App\Entity\Invoice'
             -
                 name: 'doctrine.orm.entity_listener'
+                event: 'postPersist'
+                entity: 'App\Entity\Payment'
+            -
+                name: 'doctrine.orm.entity_listener'
                 event: 'preUpdate'
                 entity: 'App\Entity\Invoice'
