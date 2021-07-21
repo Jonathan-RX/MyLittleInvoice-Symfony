@@ -37,7 +37,19 @@ class SoldCalculation
         $this->entityManager->persist($invoice);
         $this->entityManager->flush();
     }
+    public function postRemove(Payment $payment, LifecycleEventArgs $args): void
+    {
+        $invoice = $payment->getInvoice();
+        $sold = $this->SoldUpdate($invoice);
+        $invoice->setSold($sold);
+        $this->entityManager->persist($invoice);
+        $this->entityManager->flush();
+    }
 
+    /**
+     * @param Invoice $invoice
+     * @return float|int|null
+     */
     private function SoldUpdate(Invoice $invoice){
         $sold = 0;
         foreach ($invoice->getContent() as $content){
