@@ -2,27 +2,36 @@
 
 {% block title %}Invoice index{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>Invoice index</h1>
-
-    <table class="table">
+    <a href="{{ path('admin_invoice_new') }}" class="btn btn-outline-success mb-2">Create new</a>
+    <table class="table invoice">
         <thead>
             <tr>
-                <th>Customer</th>
+                <th><span class="d-md-inline d-none">Customer</span></th>
+                <th>Date</th>
                 <th>Sold</th>
+                <th></th>
                 <th><i class="bi bi-archive"></i></th>
                 <th><i class="bi bi-printer"></i></th>
                 <th><i class="bi bi-envelope-open"></i></th>
-                <th>Email</th>
-                <th>actions</th>
+                <th class="d-md-table-cell d-none">Email</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for invoice in invoices %}
             <tr>
-                <td>{{ invoice.Customer.name }}</td>
+                <td><span>{{ invoice.Customer.id }}</span><span class="d-md-inline d-none"> - {{  invoice.Customer.name }}</span></td>
+                <td>{{ invoice.createdAt|date('d/m/Y') }}</td>
                 <td>
                     {{ invoice.sold }}
+                </td>
+                <td>
                     <div class="d-inline-block justify-content-end">
                         {% if invoice.sold > 0 %}
                             <button type="button" class="btn btn-link newPayment" data-bs-toggle="modal" data-bs-target="#newPayment" data-id-invoice="{{ invoice.id }}" data-sold="{{ invoice.sold }}">
@@ -37,21 +46,20 @@
                 <td>{{ invoice.archived ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>' }}</td>
                 <td>{{ invoice.printed ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>' }}</td>
                 <td>{{ invoice.sendByMail ? '<i class="bi bi-check-circle"></i>' : '<i class="bi bi-x-circle"></i>' }}</td>
-                <td>{{ invoice.email }}</td>
+                <td class="d-md-table-cell d-none">{{ invoice.email }}</td>
                 <td>
                     {% if invoice.archived %}
                         <form method="post" action="{{ path('admin_invoice_unarchive', {'id': invoice.id}) }}" onsubmit="return confirm('Are you sure you want to unarchive this item?');" class="form-inline d-inline">
                             <input type="hidden" name="_token" value="{{ csrf_token('unarchive' ~ invoice.id) }}">
-                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-up"></i> unarchive</button>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-up"></i><span class="d-md-inline d-none"> unarchive</span></button>
                         </form>
                     {% else %}
                         <form method="post" action="{{ path('admin_invoice_archive', {'id': invoice.id}) }}" onsubmit="return confirm('Are you sure you want to archive this item?');" class="form-inline d-inline">
                             <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ invoice.id) }}">
-                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-down"></i> archive</button>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-down"></i><span class="d-md-inline d-none"> archive</span></button>
                         </form>
                     {% endif %}
-                    <a href="{{ path('admin_invoice_show', {'id': invoice.id}) }}" class="btn btn-info">show</a>
-                    <a href="{{ path('admin_invoice_edit', {'id': invoice.id}) }}" class="btn btn-primary">edit</a>
+                    <a href="{{ path('admin_invoice_edit', {'id': invoice.id}) }}" class="btn btn-primary"><i class="bi bi-pencil"></i><span class="d-md-inline d-none"> edit</span></a>
 
                     <!-- Modal payment list -->
                     <div class="modal fade" id="paymentList-{{ invoice.id }}" tabindex="-1" aria-labelledby="paymentListModalLabel" aria-hidden="true">
