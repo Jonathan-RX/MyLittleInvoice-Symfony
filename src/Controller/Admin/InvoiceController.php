@@ -142,11 +142,15 @@ class InvoiceController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$payment->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $invoice = $payment->getInvoice();
             $entityManager->remove($payment);
             $entityManager->flush();
+        }else{
+            throw new \Exception('Error in payment delete.');
         }
         return $this->json([
-            'success' => 'true'
+            'success' => 'true',
+            'newSold' => $invoice->getSold()
             ]);
     }
 }

@@ -51,6 +51,8 @@
             success: function(data){
                 if(data.success == 'true'){
                     $payment.parent('td').parent('tr').fadeOut();
+                    alert(data.newSold);
+                    $payment.parents('.invoice-row').children('.invoice-sold').html(data.newSold.toFixed(2));
                 }
             }
         });

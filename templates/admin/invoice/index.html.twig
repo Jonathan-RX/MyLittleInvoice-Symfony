@@ -25,11 +25,11 @@
         </thead>
         <tbody>
         {% for invoice in invoices %}
-            <tr>
+            <tr class="invoice-row">
                 <td><span>{{ invoice.Customer.id }}</span><span class="d-md-inline d-none"> - {{  invoice.Customer.name }}</span></td>
                 <td>{{ invoice.createdAt|date('d/m/Y') }}</td>
-                <td>
-                    {{ invoice.sold }}
+                <td class="invoice-sold">
+                    {{ invoice.sold|number_format(2) }}
                 </td>
                 <td>
                     <div class="d-inline-block justify-content-end">
