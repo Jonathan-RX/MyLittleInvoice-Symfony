@@ -134,4 +134,19 @@ class InvoiceController extends AbstractController
 
         return $this->redirectToRoute('admin_invoice_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+     * @Route("/ajax/{id}", name="admin_payment_delete", methods={"POST"})
+     */
+    public function deletePayment(Request $request, Payment $payment): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$payment->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($payment);
+            $entityManager->flush();
+        }
+        return $this->json([
+            'success' => 'true'
+            ]);
+    }
 }

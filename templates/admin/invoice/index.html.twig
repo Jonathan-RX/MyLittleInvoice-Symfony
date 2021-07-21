@@ -78,7 +78,10 @@
                                                     <td>{{ payment.amount }}</td>
                                                     <td>{{ payment.date|date("d/m/Y") }}</td>
                                                     <td>{{ payment.mode == 0 ? 'Money' }}{{ payment.mode == 1 ? 'Check' }}{{ payment.mode == 2 ? 'Bank transfert' }}{{ payment.mode == 3 ? 'Bank card' }}{{ payment.mode == 4 ? 'Paypal' }}{{ payment.mode == 5 ? 'Other' }}</td>
-                                                    <td></td>
+                                                    <td class="text-right">
+                                                        <a href="#" class="btn btn-danger delete-payment" data-delete-token="{{ csrf_token('delete' ~ payment.id) }}" data-delete-url="{{ path('admin_payment_delete', {'id': payment.id}) }}"><i class="bi bi-trash"></i></a>
+
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
 

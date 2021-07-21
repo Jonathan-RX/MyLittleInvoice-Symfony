@@ -32,7 +32,27 @@
             $('#payment_amount').val(sold);
             $('#payment_invoice').val(id);
             $('#payment_date').val('{{ "now"|date("Y-m-d") }}');
+        });
 
+        $('.delete-payment').click(function(){
+            if(confirm('Are you sure you want to delete this item?')){
+                ajaxDeletePayment($(this));
+            }
         });
     });
+
+    function ajaxDeletePayment($payment){
+        var token = $payment.data('delete-token');
+        var url = $payment.data('delete-url');
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {'_token': token},
+            success: function(data){
+                if(data.success == 'true'){
+                    $payment.parent('td').parent('tr').fadeOut();
+                }
+            }
+        });
+    }
 </script>
