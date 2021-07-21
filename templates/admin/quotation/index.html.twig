@@ -8,23 +8,35 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Adress</th>
-                <th>Printed</th>
+                <th>Customer</th>
                 <th>Email</th>
+                <th>Archived</th>
+                <th>Printed</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for quotation in quotations %}
             <tr>
-                <td>{{ quotation.id }}</td>
-                <td>{{ quotation.adress }}</td>
-                <td>{{ quotation.printed ? 'Yes' : 'No' }}</td>
+                <td>{{ quotation.Customer.name }}</td>
                 <td>{{ quotation.email }}</td>
+                <td>{{ quotation.archived ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>' }}</td>
+                <td>{{ quotation.printed ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>' }}</td>
                 <td>
-                    <a href="{{ path('admin_quotation_show', {'id': quotation.id}) }}">show</a>
-                    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}">edit</a>
+                    {% if quotation.archived %}
+                        <form method="post" action="{{ path('admin_quotation_unarchive', {'id': quotation.id}) }}" onsubmit="return confirm('Are you sure you want to unarchive this item?');" class="form-inline d-inline">
+                            <input type="hidden" name="_token" value="{{ csrf_token('unarchive' ~ quotation.id) }}">
+                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-up"></i> unarchive</button>
+                        </form>
+                    {% else %}
+                    <form method="post" action="{{ path('admin_quotation_archive', {'id': quotation.id}) }}" onsubmit="return confirm('Are you sure you want to archive this item?');" class="form-inline d-inline">
+                        <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ quotation.id) }}">
+                        <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-down"></i> archive</button>
+                    </form>
+                    {% endif %}
+
+                    <a href="{{ path('admin_quotation_show', {'id': quotation.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}" class="btn btn-primary">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +47,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('admin_quotation_new') }}">Create new</a>
+    <a href="{{ path('admin_quotation_new') }}" class="btn btn-outline-success">Create new</a>
 {% endblock %}
