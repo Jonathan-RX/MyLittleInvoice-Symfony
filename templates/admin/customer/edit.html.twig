@@ -5,7 +5,7 @@
 {% block body %}
     <h1>{% trans %}Edit Customer{% endtrans %}</h1>
 
-    {{ include('admin/customer/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/customer/_form.html.twig', {'button_label': 'Update'|trans}) }}
 
     <a href="{{ path('admin_customer_index') }}">{% trans %}back to list{% endtrans %}</a>
 
