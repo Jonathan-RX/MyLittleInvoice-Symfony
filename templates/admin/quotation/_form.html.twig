@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-6">
         <div class="form-group">
-            <label for="quotation_Customer">Customer</label>
+            <label for="quotation_Customer">{% trans %}Customer{% endtrans %}</label>
             <select id="quotation_Customer" name="quotation[Customer]" class="form-control">
             {% for cus in form.Customer.vars.choices %}
                 <option value="{{ cus.data.id }}" data-email="{{ cus.data.email }}" data-adress="{{ cus.data.adress }}" {{ (cus.data.id == form.Customer.vars.value) ? ' selected="selected"': '' }}>{{ cus.data.name }}</option>
@@ -17,15 +17,15 @@
     </div>
 </div>
 
-<button type="button" class="add_item_link mt-2 mb-2" data-collection-holder-class="content">Add a line</button>
+<button type="button" class="add_item_link mt-2 mb-2" data-collection-holder-class="content">{% trans %}Add a line{% endtrans %}</button>
     <table class="content table" data-prototype="{{ form_widget(form.content.vars.prototype)|e('html_attr') }}">
         <thead>
-                <th class="ref">Ref</th>
-                <th class="description">Description</th>
-                <th class="quantity">Qty</th>
-                <th class="taxes">Tax (%)</th>
-                <th class="price">Price</th>
-                <th class="total">Total</th>
+                <th class="ref">{% trans %}Ref{% endtrans %}</th>
+                <th class="description">{% trans %}Description{% endtrans %}</th>
+                <th class="quantity">{% trans %}Qty{% endtrans %}</th>
+                <th class="taxes">{% trans %}Tax{% endtrans %} (%)</th>
+                <th class="price">{% trans %}Price{% endtrans %}</th>
+                <th class="total">{% trans %}Total{% endtrans %}</th>
                 <th class="action"></th>
         </thead>
         <tbody>
@@ -57,21 +57,21 @@
         <div class="col-6">
             <table class="table">
                 <tr>
-                    <th>Subtotal</th>
+                    <th>{% trans %}Subtotal{% endtrans %}</th>
                     <td class="subtotal bg-white"></td>
                 </tr>
                 <tr>
-                    <th>Taxes</th>
+                    <th>{% trans %}Taxes{% endtrans %}</th>
                     <td class="subtotal-taxes bg-white"></td>
                 </tr>
                 <tr>
-                    <th>Total</th>
+                    <th>{% trans %}Total{% endtrans %}</th>
                     <td class="grand-total bg-white"></td>
                 </tr>
             </table>
         </div>
     </div>
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn">{{ button_label|default('Save'|trans) }}</button>
 
 <style type="text/css">
     .ref, .quantity, .taxes, .price, .total{
