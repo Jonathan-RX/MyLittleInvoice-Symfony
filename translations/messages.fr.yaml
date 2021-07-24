@@ -1,8 +1,10 @@
-Customer: Client
-Delete: Supprimer
-Are you sure you want to delete this item?: Etes vous sûr de vouloir supprimer cet élément?
+Close: Fermer
 Save: Sauvegarder
 Update: Mise à jours
+Delete: Supprimer
+
+Customer: Client
+Are you sure you want to delete this item?: Etes vous sûr de vouloir supprimer cet élément?
 Edit Customer: Modifier client
 back to list: retour à la liste
 Customer index: Liste des clients
@@ -24,3 +26,15 @@ Price: Prix
 Total: Total
 Subtotal: Sous total
 Taxes: Taxes
+
+New payment: Nouveau règlement
+Invoice Number: Numéro de facture
+Amount: Montant
+Date: Date
+Mode: Mode
+Money: Espèce
+Check: Chèque
+Bank transfer: Virement bancaire
+Bank card: Carte bancaire
+Paypal: Paypal
+Other: Autre

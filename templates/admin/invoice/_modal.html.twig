@@ -4,8 +4,8 @@
         <div class="modal-content">
             <form action="{{ path('admin_invoice_index') }}" method="post" class="form-control">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newPaymentModalLabel">New payment</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="newPaymentModalLabel">{% trans %}New payment{% endtrans %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans %}Close{% endtrans %}"></button>
                 </div>
                 {{ form_start(newPayment) }}
                 <div class="modal-body">
@@ -15,8 +15,8 @@
                         {{ form_row(newPayment.mode) }}
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="{% trans %}Save{% endtrans %}">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans %}Close{% endtrans %}</button>
                 </div>
                 {{ form_end(newPayment) }}
             </form>
