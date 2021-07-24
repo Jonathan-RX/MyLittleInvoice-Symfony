@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Customer index{% endblock %}
+{% block title %}{% trans %}Customer index{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Customer index</h1>
+    <h1>{% trans %}Customer index{% endtrans %}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Adress</th>
-                <th>Email</th>
-                <th>actions</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Adress{% endtrans %}</th>
+                <th>{% trans %}Email{% endtrans %}</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,17 +23,16 @@
                 <td>{{ customer.adress ? customer.adress|join(', ') : '' }}</td>
                 <td>{{ customer.email }}</td>
                 <td>
-                    <a href="{{ path('admin_customer_show', {'id': customer.id}) }}">show</a>
-                    <a href="{{ path('admin_customer_edit', {'id': customer.id}) }}">edit</a>
+                    <a href="{{ path('admin_customer_edit', {'id': customer.id}) }}">{% trans %}edit{% endtrans %}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{% trans %}no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_customer_new') }}">Create new</a>
+    <a href="{{ path('admin_customer_new') }}">{% trans %}Create new{% endtrans %}</a>
 {% endblock %}
