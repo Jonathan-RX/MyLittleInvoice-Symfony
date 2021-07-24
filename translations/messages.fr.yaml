@@ -2,6 +2,7 @@ Close: Fermer
 Save: Sauvegarder
 Update: Mise à jours
 Delete: Supprimer
+Archived: Archivé
 
 Customer: Client
 Are you sure you want to delete this item?: Etes vous sûr de vouloir supprimer cet élément?
@@ -18,6 +19,7 @@ New Customer: Nouveau client
 Create new Customer: Créer un nouveau client
 
 Edit Quotation: Edition du devis
+Quotation index: Liste des devis
 
 Invoice: Facture
 Printed: Imprimée

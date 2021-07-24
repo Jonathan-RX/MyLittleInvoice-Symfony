@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Quotation index{% endblock %}
+{% block title %}{% trans %}Quotation index{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Quotation index</h1>
+    <h1>{% trans %}Quotation index{% endtrans %}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Customer</th>
-                <th>Email</th>
-                <th>Archived</th>
-                <th>Printed</th>
-                <th>actions</th>
+                <th>{% trans %}Customer{% endtrans %}</th>
+                <th>{% trans %}Email{% endtrans %}</th>
+                <th>{% trans %}Archived{% endtrans %}</th>
+                <th>{% trans %}Printed{% endtrans %}</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,28 +24,27 @@
                 <td>{{ quotation.printed ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>' }}</td>
                 <td>
                     {% if quotation.archived %}
-                        <form method="post" action="{{ path('admin_quotation_unarchive', {'id': quotation.id}) }}" onsubmit="return confirm('Are you sure you want to unarchive this item?');" class="form-inline d-inline">
+                        <form method="post" action="{{ path('admin_quotation_unarchive', {'id': quotation.id}) }}" onsubmit="return confirm('{% trans %}Are you sure you want to unarchive this item?{% endtrans %}');" class="form-inline d-inline">
                             <input type="hidden" name="_token" value="{{ csrf_token('unarchive' ~ quotation.id) }}">
-                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-up"></i> unarchive</button>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-up"></i> {% trans %}unarchive{% endtrans %}</button>
                         </form>
                     {% else %}
-                    <form method="post" action="{{ path('admin_quotation_archive', {'id': quotation.id}) }}" onsubmit="return confirm('Are you sure you want to archive this item?');" class="form-inline d-inline">
+                    <form method="post" action="{{ path('admin_quotation_archive', {'id': quotation.id}) }}" onsubmit="return confirm('{% trans %}Are you sure you want to archive this item?{% endtrans %}');" class="form-inline d-inline">
                         <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ quotation.id) }}">
-                        <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-down"></i> archive</button>
+                        <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-down"></i> {% trans %}archive{% endtrans %}</button>
                     </form>
                     {% endif %}
 
-                    <a href="{{ path('admin_quotation_show', {'id': quotation.id}) }}" class="btn btn-info">show</a>
-                    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}" class="btn btn-primary">edit</a>
+                    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}" class="btn btn-primary">{% trans %}edit{% endtrans %}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">{% trans %}no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_quotation_new') }}" class="btn btn-outline-success">Create new</a>
+    <a href="{{ path('admin_quotation_new') }}" class="btn btn-outline-success">{% trans %}Create new{% endtrans %}</a>
 {% endblock %}
