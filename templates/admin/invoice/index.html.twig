@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Invoice index{% endblock %}
+{% block title %}{% trans %}Invoice index{% endtrans %}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 {% endblock %}
 
 {% block body %}
-    <h1>Invoice index</h1>
-    <a href="{{ path('admin_invoice_new') }}" class="btn btn-outline-success mb-2">Create new</a>
+    <h1>{% trans %}Invoice index{% endtrans %}</h1>
+    <a href="{{ path('admin_invoice_new') }}" class="btn btn-outline-success mb-2">{% trans %}Create new{% endtrans %}</a>
     <table class="table invoice">
         <thead>
             <tr>
-                <th><span class="d-md-inline d-none">Customer</span></th>
-                <th>Date</th>
-                <th>Sold</th>
+                <th><span class="d-md-inline d-none">{% trans %}Customer{% endtrans %}</span></th>
+                <th>{% trans %}Date{% endtrans %}</th>
+                <th>{% trans %}Sold{% endtrans %}</th>
                 <th></th>
                 <th><i class="bi bi-archive"></i></th>
                 <th><i class="bi bi-printer"></i></th>
                 <th><i class="bi bi-envelope-open"></i></th>
-                <th class="d-md-table-cell d-none">Email</th>
+                <th class="d-md-table-cell d-none">{% trans %}Email{% endtrans %}</th>
                 <th></th>
             </tr>
         </thead>
@@ -49,35 +49,35 @@
                 <td class="d-md-table-cell d-none">{{ invoice.email }}</td>
                 <td>
                     {% if invoice.archived %}
-                        <form method="post" action="{{ path('admin_invoice_unarchive', {'id': invoice.id}) }}" onsubmit="return confirm('Are you sure you want to unarchive this item?');" class="form-inline d-inline">
+                        <form method="post" action="{{ path('admin_invoice_unarchive', {'id': invoice.id}) }}" onsubmit="return confirm('{% trans %}Are you sure you want to unarchive this item?{% endtrans %}');" class="form-inline d-inline">
                             <input type="hidden" name="_token" value="{{ csrf_token('unarchive' ~ invoice.id) }}">
-                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-up"></i><span class="d-md-inline d-none"> unarchive</span></button>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-up"></i><span class="d-md-inline d-none"> {% trans %}unarchive{% endtrans %}</span></button>
                         </form>
                     {% else %}
-                        <form method="post" action="{{ path('admin_invoice_archive', {'id': invoice.id}) }}" onsubmit="return confirm('Are you sure you want to archive this item?');" class="form-inline d-inline">
+                        <form method="post" action="{{ path('admin_invoice_archive', {'id': invoice.id}) }}" onsubmit="return confirm('{% trans %}Are you sure you want to archive this item?{% endtrans %}');" class="form-inline d-inline">
                             <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ invoice.id) }}">
-                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-down"></i><span class="d-md-inline d-none"> archive</span></button>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-down"></i><span class="d-md-inline d-none"> {% trans %}archive{% endtrans %}</span></button>
                         </form>
                     {% endif %}
-                    <a href="{{ path('admin_invoice_edit', {'id': invoice.id}) }}" class="btn btn-primary"><i class="bi bi-pencil"></i><span class="d-md-inline d-none"> edit</span></a>
+                    <a href="{{ path('admin_invoice_edit', {'id': invoice.id}) }}" class="btn btn-primary"><i class="bi bi-pencil"></i><span class="d-md-inline d-none"> {% trans %}edit{% endtrans %}</span></a>
 
                     <!-- Modal payment list -->
                     <div class="modal fade" id="paymentList-{{ invoice.id }}" tabindex="-1" aria-labelledby="paymentListModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="paymentListModalLabel">Payment list</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <h5 class="modal-title" id="paymentListModalLabel">{% trans %}Payment list{% endtrans %}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans %}Close{% endtrans %}"></button>
                                 </div>
                                 <div class="modal-body">
                                     {%  if invoice.payments is not empty %}
                                         <table class="table table-striped table-sm">
                                             <thead>
                                             <tr>
-                                                <th>Amount</th>
-                                                <th>Date</th>
-                                                <th>Mode</th>
-                                                <th>Action</th>
+                                                <th>{% trans %}Amount{% endtrans %}</th>
+                                                <th>{% trans %}Date{% endtrans %}</th>
+                                                <th>{% trans %}Mode{% endtrans %}</th>
+                                                <th>{% trans %}Action{% endtrans %}</th>
                                             </tr>
                                             </thead>
                                             {% for payment in invoice.payments %}
@@ -85,7 +85,7 @@
                                                 <tr>
                                                     <td>{{ payment.amount }}</td>
                                                     <td>{{ payment.date|date("d/m/Y") }}</td>
-                                                    <td>{{ payment.mode == 0 ? 'Money' }}{{ payment.mode == 1 ? 'Check' }}{{ payment.mode == 2 ? 'Bank transfert' }}{{ payment.mode == 3 ? 'Bank card' }}{{ payment.mode == 4 ? 'Paypal' }}{{ payment.mode == 5 ? 'Other' }}</td>
+                                                    <td>{{ payment.mode == 0 ? 'Money'|trans }}{{ payment.mode == 1 ? 'Check'|trans }}{{ payment.mode == 2 ? 'Bank transfert'|trans }}{{ payment.mode == 3 ? 'Bank card'|trans }}{{ payment.mode == 4 ? 'Paypal'|trans }}{{ payment.mode == 5 ? 'Other'|trans }}</td>
                                                     <td class="text-right">
                                                         <a href="#" class="btn btn-danger delete-payment" data-delete-token="{{ csrf_token('delete' ~ payment.id) }}" data-delete-url="{{ path('admin_payment_delete', {'id': payment.id}) }}"><i class="bi bi-trash"></i></a>
 
@@ -95,11 +95,11 @@
 
                                         </table>
                                     {% else %}
-                                        This invoice have't any payment
+                                        {% trans %}This invoice have't any payment{% endtrans %}
                                     {% endif %}
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans %}Close{% endtrans %}</button>
                                 </div>
                             </div>
                         </div>
@@ -108,12 +108,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">{% trans %}no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_invoice_new') }}" class="btn btn-outline-success">Create new</a>
+    <a href="{{ path('admin_invoice_new') }}" class="btn btn-outline-success">{% trans %}Create new{% endtrans %}</a>
     {{ include('admin/invoice/_modal.html.twig') }}
 {% endblock %}

@@ -27,7 +27,16 @@ Total: Total
 Subtotal: Sous total
 Taxes: Taxes
 Edit Invoice: Edition de facture
+Invoice index: Liste des factures
+Sold: Solde
+Are you sure you want to archive this item?: Etes vous sûr de vouloir archiver cet élément?
+Are you sure you want to unarchive this item?: Etes vous sûr de vouloir déarchiver cet élément?
+archive: archive
+unarchive: déarchiver
+Action: Action
+This invoice have't any payment: Cette facture n'a pas de règlement
 
+Payment list: Liste des règlements
 New payment: Nouveau règlement
 Invoice Number: Numéro de facture
 Amount: Montant
