@@ -24,33 +24,33 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="#">{% trans %}Home{% endtrans %}</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Customers
+                                {% trans %}Customers{% endtrans %}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ path('admin_customer_index') }}">Customers</a></li>
-                                <li><a class="dropdown-item" href="{{ path('admin_customer_new') }}">New customer</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_customer_index') }}">{% trans %}Customers{% endtrans %}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_customer_new') }}">{% trans %}New customer{% endtrans %}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Quotation
+                                {% trans %}Quotation{% endtrans %}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ path('admin_quotation_index') }}">Quotation list</a></li>
-                                <li><a class="dropdown-item" href="{{ path('admin_quotation_new') }}">New quotation</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_quotation_index') }}">{% trans %}Quotation list{% endtrans %}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_quotation_new') }}">{% trans %}New Quotation{% endtrans %}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Invoice
+                                {% trans %}Invoice{% endtrans %}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ path('admin_invoice_index') }}">Invoice list</a></li>
-                                <li><a class="dropdown-item" href="{{ path('admin_invoice_new') }}">New invoice</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_invoice_index') }}">{% trans %}Invoice list{% endtrans %}</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_invoice_new') }}">{% trans %}New Invoice{% endtrans %}</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -3,6 +3,7 @@ Save: Sauvegarder
 Update: Mise à jours
 Delete: Supprimer
 Archived: Archivé
+Home: Accueil
 
 Log in: S'identifier
 Please sign in: Identification
@@ -11,6 +12,8 @@ Password: Mot de passe
 Sign in: S'identifier
 
 Customer: Client
+Customers: Clients
+New customer: Nouveau client
 Are you sure you want to delete this item?: Etes vous sûr de vouloir supprimer cet élément?
 Edit Customer: Modifier client
 back to list: retour à la liste
@@ -29,6 +32,7 @@ New Quotation: Nouveau Devis
 Create new Quotation: Créer un nouveau Devis
 Edit Quotation: Edition du devis
 Quotation index: Liste des devis
+Quotation list: Liste des devis
 
 Invoice: Facture
 Printed: Imprimée
@@ -48,6 +52,7 @@ Subtotal: Sous total
 Taxes: Taxes
 Edit Invoice: Edition de facture
 Invoice index: Liste des factures
+Invoice list: Liste des factures
 Sold: Solde
 Are you sure you want to archive this item?: Etes vous sûr de vouloir archiver cet élément?
 Are you sure you want to unarchive this item?: Etes vous sûr de vouloir déarchiver cet élément?
