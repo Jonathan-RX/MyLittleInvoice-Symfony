@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Invoice{% endblock %}
+{% block title %}{% trans %}Invoice{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Invoice</h1>
+    <h1>{% trans %}Invoice{% endtrans %}</h1>
 
     <table class="table">
         <tbody>
@@ -12,39 +12,35 @@
                 <td>{{ invoice.id }}</td>
             </tr>
             <tr>
-                <th>Adress</th>
+                <th>{% trans %}Adress{% endtrans %}</th>
                 <td>{{ invoice.adress }}</td>
             </tr>
             <tr>
-                <th>Content</th>
-                <td>{{ invoice.content ? invoice.content|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Sold</th>
+                <th>{% trans %}Sold{% endtrans %}</th>
                 <td>{{ invoice.sold }}</td>
             </tr>
             <tr>
-                <th>Printed</th>
+                <th>{% trans %}Printed{% endtrans %}</th>
                 <td>{{ invoice.printed ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>Send_by_mail</th>
+                <th>{% trans %}Send by mail{% endtrans %}</th>
                 <td>{{ invoice.sendByMail ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
+                <th>{% trans %}Created at{% endtrans %}</th>
                 <td>{{ invoice.createdAt ? invoice.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>{% trans %}mail{% endtrans %}</th>
                 <td>{{ invoice.email }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('admin_invoice_index') }}">back to list</a>
+    <a href="{{ path('admin_invoice_index') }}">{% trans %}back to list{% endtrans %}</a>
 
-    <a href="{{ path('admin_invoice_edit', {'id': invoice.id}) }}">edit</a>
+    <a href="{{ path('admin_invoice_edit', {'id': invoice.id}) }}">{% trans %}edit{% endtrans %}</a>
 
     {{ include('admin/invoice/_delete_form.html.twig') }}
 {% endblock %}
