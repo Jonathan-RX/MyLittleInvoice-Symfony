@@ -49,16 +49,6 @@ class CustomerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin_customer_show", methods={"GET"})
-     */
-    public function show(Customer $customer): Response
-    {
-        return $this->render('admin/customer/show.html.twig', [
-            'customer' => $customer,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="admin_customer_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Customer $customer): Response
