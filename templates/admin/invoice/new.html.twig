@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Invoice{% endblock %}
+{% block title %}{% trans %}New Invoice{% endtrans %}{% endblock %}
 
 {% form_theme form _self %}
 {% block _invoice_content_entry_widget %}
@@ -12,9 +12,9 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Create new Invoice</h1>
+    <h1>{% trans %}Create new Invoice{% endtrans %}</h1>
 
     {{ include('admin/invoice/_form.html.twig') }}
 
-    <a href="{{ path('admin_invoice_index') }}">back to list</a>
+    <a href="{{ path('admin_invoice_index') }}">{% trans %}back to list{% endtrans %}</a>
 {% endblock %}
