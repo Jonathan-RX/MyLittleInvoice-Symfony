@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Invoice{% endblock %}
+{% block title %}{% trans %}Edit Invoice{% endtrans %}{% endblock %}
 
 {% form_theme form _self %}
 {% block _invoice_content_entry_widget %}
@@ -13,11 +13,11 @@
 
 
 {% block body %}
-    <h1>Edit Invoice</h1>
+    <h1>{% trans %}Edit Invoice{% endtrans %}</h1>
 
-    {{ include('admin/invoice/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/invoice/_form.html.twig', {'button_label': 'Update'|trans}) }}
 
-    <a href="{{ path('admin_invoice_index') }}">back to list</a>
+    <a href="{{ path('admin_invoice_index') }}">{% trans %}back to list{% endtrans %}</a>
 
     {{ include('admin/invoice/_delete_form.html.twig') }}
 {% endblock %}
