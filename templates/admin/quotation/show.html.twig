@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Quotation{% endblock %}
+{% block title %}{% trans %}Quotation{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Quotation</h1>
+    <h1>{% trans %}Quotation{% endtrans %}</h1>
 
     <table class="table">
         <tbody>
@@ -12,35 +12,31 @@
                 <td>{{ quotation.id }}</td>
             </tr>
             <tr>
-                <th>Adress</th>
+                <th>{% trans %}Adress{% endtrans %}</th>
                 <td>{{ quotation.adress }}</td>
             </tr>
             <tr>
-                <th>Content</th>
-                <td>{{ quotation.content ? quotation.content|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Printed</th>
+                <th>{% trans %}Printed{% endtrans %}</th>
                 <td>{{ quotation.printed ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>Send_by_mail</th>
+                <th>{% trans %}Send by mail{% endtrans %}</th>
                 <td>{{ quotation.sendByMail ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
+                <th>{% trans %}Created at{% endtrans %}</th>
                 <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>{% trans %}Email{% endtrans %}</th>
                 <td>{{ quotation.email }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('admin_quotation_index') }}">back to list</a>
+    <a href="{{ path('admin_quotation_index') }}">{% trans %}back to list{% endtrans %}</a>
 
-    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}">edit</a>
+    <a href="{{ path('admin_quotation_edit', {'id': quotation.id}) }}">{% trans %}edit{% endtrans %}</a>
 
     {{ include('admin/quotation/_delete_form.html.twig') }}
 {% endblock %}
